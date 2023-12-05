@@ -1,31 +1,18 @@
-import { Inter } from "next/font/google";
+import { Vazirmatn } from "next/font/google";
 import ProductCard from "@/components/ProductCard";
+import ProductList from "@/components/ProductList";
+import FilterSection from "@/components/FilterSection";
 
-const inter = Inter({ subsets: ["latin"] });
+const vazir = Vazirmatn({ subsets: ["arabic"] });
 
 export default function Home() {
   return (
-    <ProductCard
-      image={mock.imageUrl}
-      title={mock.name}
-      price={mock.minPrice}
-    />
+    <main
+      className={vazir.className}
+      style={{ display: "flex", gap: "1rem", padding: "4rem" }}
+    >
+      <FilterSection />
+      <ProductList />
+    </main>
   );
 }
-
-const mock = {
-  id: "Ybwc_okBd7CINZ3k6Yv1",
-  name: "Galaxy A24 128GB RAM 6GB",
-  slug: "galaxy-a24-128gb-ram-6gb",
-  available: true,
-  categoryId: 47,
-  categoryName: "کالای دیجیتال",
-  minPrice: 102990000,
-  maxPrice: 102990000,
-  imageUrl:
-    "https://ghestchy.ir/wp-content/uploads/2023/08/unnamed-file-17.jpg",
-  azkivam: false,
-  hidden: false,
-  merchantName: "قسطچی",
-  merchantId: 263562,
-};

@@ -1,13 +1,16 @@
 .card {
-  width: 18rem;
+  width: 18.75rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  padding: 2rem 1rem;
+  border: 1px solid gray;
+  flex-basis: calc(100% / 4);
 }
 
 .imageContainer {
   width: 100%;
-  height: 8rem;
+  height: 10rem;
   position: relative;
 }
 
@@ -17,4 +20,25 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.priceContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: black;
+  > :first-child {
+    color: gray;
+    font-size: 1rem;
+  }
+  div {
+    display: flex;
+    gap: 0.25rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    :last-child {
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+  }
 }

@@ -14,8 +14,12 @@ function ProductCard({ image, price, title }: IProductCardProps) {
         <Image src={image} fill alt={title} objectFit="contain" />
       </div>
       <h3 className={styles.title}>{title}</h3>
-      <div>
+      <div className={styles.priceContainer}>
         <span>شروع قیمت از</span>
+        <div>
+          <span>{price.toLocaleString("fa")}</span>
+          <span>تومان</span>
+        </div>
       </div>
     </div>
   );
