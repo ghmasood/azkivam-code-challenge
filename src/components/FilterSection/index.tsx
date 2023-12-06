@@ -8,8 +8,15 @@ import { useRouter } from "next/router";
 interface IFilterSectionProps {
   merchants: IMerchantRes;
   categories: ICategoriesRes;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
-function FilterSection({ categories, merchants }: IFilterSectionProps) {
+function FilterSection({
+  categories,
+  merchants,
+  loading,
+  setLoading,
+}: IFilterSectionProps) {
   //ROUTER
   const router = useRouter();
   return (
@@ -32,7 +39,8 @@ function FilterSection({ categories, merchants }: IFilterSectionProps) {
                         : ""
                     }
                     onClick={() => {
-                      router.push(`/?catId=${item.id}`);
+                      setLoading(true);
+                      router.replace(`/?catId=${item.id}`);
                     }}
                   >
                     {" "}
@@ -40,7 +48,7 @@ function FilterSection({ categories, merchants }: IFilterSectionProps) {
                     {/* <ArrowDown2 size={"1.5rem"} /> */}
                   </div>
                   <div>
-                    {categories.data.map(
+                    {categories?.data?.map(
                       (i) =>
                         i.parent === item.id && (
                           <div
@@ -50,7 +58,8 @@ function FilterSection({ categories, merchants }: IFilterSectionProps) {
                                 : ""
                             }
                             onClick={() => {
-                              router.push(`/?catId=${i.id}`);
+                              setLoading(true);
+                              router.replace(`/?catId=${i.id}`);
                             }}
                           >
                             {i.name}

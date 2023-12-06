@@ -2,21 +2,27 @@ import React from "react";
 import ProductCard from "../ProductCard";
 import { IProductRes } from "@/types";
 import styles from "./productList.module.scss";
+import ProductCardSkeleton from "../ProductCard/skeleton";
 
 interface IProductListProps {
   data: IProductRes;
+  loading: boolean;
 }
-function ProductList({ data }: IProductListProps) {
+function ProductList({ data, loading }: IProductListProps) {
   return (
     <div className={styles.list}>
-      {data?.data?.map((item) => (
-        <ProductCard
-          key={item.id}
-          image={item.imageUrl}
-          title={item.name}
-          price={item.minPrice}
-        />
-      ))}
+      {loading
+        ? [...new Array(12)].map((_, index) => (
+            <ProductCardSkeleton key={index + "skeleton"} />
+          ))
+        : data?.data?.map((item, index) => (
+            <ProductCard
+              key={item.id + "id" + index}
+              image={item.imageUrl}
+              title={item.name}
+              price={item.minPrice}
+            />
+          ))}
     </div>
   );
 }

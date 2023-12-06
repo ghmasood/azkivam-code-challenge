@@ -11,17 +11,32 @@ import {
   IMerchantRes,
   IProductRes,
 } from "@/types";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const vazir = Vazirmatn({ subsets: ["arabic"] });
 
 const Home: NextPage<IHomePageData> = (props) => {
+  //STATES
+  const [loading, setLoading] = useState(false);
+
+  //ROUTER
+  const router = useRouter();
+
+  //LIFECYCLE HOOK
+  useEffect(() => {
+    setLoading(false);
+  }, [props]);
+
   return (
     <main className={`${vazir.className} ${styles.mainPage}`}>
       <FilterSection
+        loading={loading}
+        setLoading={setLoading}
         merchants={props.merchantData}
         categories={props.categoriesData}
       />
-      <ProductList data={props.productData} />
+      <ProductList loading={loading} data={props.productData} />
     </main>
   );
 };
