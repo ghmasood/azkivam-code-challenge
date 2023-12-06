@@ -1,28 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ProductCard from "../ProductCard";
-import { IProduct } from "@/types";
+import { IProductRes } from "@/types";
+import styles from "./productList.module.scss";
 
-interface IProductListProps {}
-function ProductList({}: IProductListProps) {
-  const [productList, setProductList] = useState<IProduct[]>([]);
-  useEffect(() => {
-    fetch("https://interview-api.azkiloan.com/api/v1/products?size=12&page=1", {
-      method: "POST",
-    }).then((res) => res.json().then((data) => setProductList(data.data)));
-  }, []);
-
+interface IProductListProps {
+  data: IProductRes;
+}
+function ProductList({ data }: IProductListProps) {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        width: "80%",
-        borderRadius: "0.75rem",
-        overflow: "hidden",
-        border: "1px solid gray",
-      }}
-    >
-      {productList?.map((item, index) => (
+    <div className={styles.list}>
+      {data?.data?.map((item) => (
         <ProductCard
           key={item.id}
           image={item.imageUrl}

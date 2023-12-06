@@ -1,14 +1,14 @@
 import React from "react";
 
+import { ICategoriesRes, IMerchantRes } from "@/types";
+
+import styles from "./filterSection.module.scss";
 interface IFilterSectionProps {
-  customClass?: string;
+  merchants: IMerchantRes;
+  categories: ICategoriesRes;
 }
-function FilterSection({ customClass = "" }: IFilterSectionProps) {
-  return (
-    <div style={{ width: "20%", height: "90vh", backgroundColor: "black" }}>
-      FilterSection
-    </div>
-  );
+function FilterSection({ categories, merchants }: IFilterSectionProps) {
+  return <div className={styles.filterWrapper}>FilterSection</div>;
 }
 
 export default FilterSection;

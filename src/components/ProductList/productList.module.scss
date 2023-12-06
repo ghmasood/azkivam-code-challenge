@@ -1,0 +1,12 @@
+@import "/src/assets/styles/helpers/variables";
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid $border;
+  right: 27rem;
+  left: 8rem;
+  position: absolute;
+}

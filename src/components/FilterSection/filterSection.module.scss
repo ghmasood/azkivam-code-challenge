@@ -1,0 +1,10 @@
+@import "/src/assets/styles/helpers/variables";
+
+.filterWrapper {
+  width: 18rem;
+  position: fixed;
+  height: 60vh;
+  border-radius: 1rem;
+  border: 2px solid $border;
+  background-color: $cardBg;
+}
