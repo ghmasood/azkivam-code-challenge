@@ -55,5 +55,23 @@
 }
 
 .isActive {
-  color: #1768e5 !important;
+  color: $active !important;
+}
+
+.merchantWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 15rem;
+  overflow: scroll;
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    > div {
+      display: flex;
+      cursor: pointer;
+      gap: 0.25rem;
+    }
+  }
 }

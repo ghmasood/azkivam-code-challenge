@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { ICategoriesRes, IMerchantRes } from "@/types";
 
 import styles from "./filterSection.module.scss";
-import { ArrowDown, ArrowDown2 } from "iconsax-react";
 import { useRouter } from "next/router";
+import { Stop, TickSquare } from "iconsax-react";
 interface IFilterSectionProps {
   merchants: IMerchantRes;
   categories: ICategoriesRes;
@@ -19,6 +19,10 @@ function FilterSection({
 }: IFilterSectionProps) {
   //ROUTER
   const router = useRouter();
+
+  //STATES
+  const [ids, setIds] = useState<number[]>([]);
+
   return (
     <div className={styles.filterWrapper}>
       <h3>فیلترها</h3>
@@ -73,8 +77,29 @@ function FilterSection({
         </div>
       </div>
       <hr />
-      <div>
+      <div className={styles.merchantWrapper}>
         <h4>فروشگاه‌ها</h4>
+        <div>
+          {merchants.data.map((item, _) => (
+            <div
+              key={item.id}
+              onClick={() => {
+                if (ids.includes(item.id))
+                  setIds((prev) => prev.filter((i) => i !== item.id));
+                else setIds((prev) => [...prev, item.id]);
+              }}
+            >
+              {ids.includes(item.id) ? (
+                <TickSquare variant="Bold" className={styles.isActive} />
+              ) : (
+                <Stop />
+              )}
+              <span className={ids.includes(item.id) ? styles.isActive : ""}>
+                {item.name}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
