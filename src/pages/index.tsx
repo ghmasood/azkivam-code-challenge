@@ -31,13 +31,16 @@ export default Home;
 export const getServerSideProps: GetServerSideProps<IHomePageData> = async (
   ctx
 ) => {
-  const {} = ctx.query;
+  const { catId } = ctx.query;
   const baseURL = "https://interview-api.azkiloan.com/api/v1";
 
   //FETCH PRODUCT
-  const productRes = await fetch(`${baseURL}/products?size=12&page=1`, {
-    method: "POST",
-  });
+  const productRes = await fetch(
+    `${baseURL}/products/${catId ? catId : ""}?size=12&page=1`,
+    {
+      method: "POST",
+    }
+  );
   const productData = (await productRes.json()) as IProductRes;
 
   //FETCH MERCHANT

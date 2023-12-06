@@ -1,10 +1,59 @@
 @import "/src/assets/styles/helpers/variables";
 
 .filterWrapper {
-  width: 18rem;
-  position: fixed;
-  height: 60vh;
+  width: 20%;
   border-radius: 1rem;
   border: 2px solid $border;
   background-color: $cardBg;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  > h3 {
+    color: $text-secondary;
+    font-weight: 500;
+    font-size: 1.75rem;
+  }
+  h4 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-size: 1.25rem;
+    color: $text-tertiary;
+  }
+  > hr {
+    border-color: $border;
+    width: 100%;
+  }
+}
+
+.categoriesWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  > div {
+    > :first-child {
+      color: $text-primary;
+      font-size: 1.125rem;
+      font-weight: 400;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      cursor: pointer;
+    }
+    :hover {
+      color: #c0c0c0;
+    }
+    > :last-child {
+      padding-right: 2rem;
+      color: $text-tertiary;
+      font-size: 1rem;
+      font-weight: 300;
+      cursor: pointer;
+    }
+  }
+}
+
+.isActive {
+  color: #1768e5 !important;
 }
