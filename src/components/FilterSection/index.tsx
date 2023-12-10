@@ -75,6 +75,7 @@ function FilterSection({
                       (i) =>
                         i.parent === item.id && (
                           <div
+                            key={i.id}
                             className={
                               Number(router?.query?.catId) === i.id
                                 ? styles.isActive
