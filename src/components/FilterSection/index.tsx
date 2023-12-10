@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
-import { ICategoriesRes, IMerchantRes } from "@/types";
+import { CloudFog, SearchNormal1, Stop, TickSquare } from "iconsax-react";
 
 import styles from "./filterSection.module.scss";
-import { useRouter } from "next/router";
-import { Stop, TickSquare } from "iconsax-react";
+
+import { ICategoriesRes, IMerchantRes } from "@/types";
 interface IFilterSectionProps {
   merchants: IMerchantRes;
   categories: ICategoriesRes;
@@ -22,12 +23,25 @@ function FilterSection({
 
   //STATES
   const [ids, setIds] = useState<number[]>([]);
+  const [localSearch, setLocalSearch] = useState("");
+
+  useEffect(() => {
+    setLoading(true);
+    router.replace({ ...router, query: { ...router.query, merchants: ids } });
+  }, [ids]);
 
   return (
     <div className={styles.filterWrapper}>
       <h3>فیلترها</h3>
       <div>
-        <h4>دسته بندی‌ها</h4>
+        <h4
+          onClick={() => {
+            setLoading(true);
+            router.replace({ pathname: router.pathname });
+          }}
+        >
+          دسته بندی‌ها
+        </h4>
         <div className={styles.categoriesWrapper}>
           {categories?.data?.map(
             (item) =>
@@ -44,7 +58,10 @@ function FilterSection({
                     }
                     onClick={() => {
                       setLoading(true);
-                      router.replace(`/?catId=${item.id}`);
+                      router.replace({
+                        ...router,
+                        query: { ...router.query, catId: item.id },
+                      });
                     }}
                   >
                     {" "}
@@ -63,7 +80,10 @@ function FilterSection({
                             }
                             onClick={() => {
                               setLoading(true);
-                              router.replace(`/?catId=${i.id}`);
+                              router.replace({
+                                ...router,
+                                query: { ...router.query, catId: i.id },
+                              });
                             }}
                           >
                             {i.name}
@@ -79,26 +99,36 @@ function FilterSection({
       <hr />
       <div className={styles.merchantWrapper}>
         <h4>فروشگاه‌ها</h4>
+        <div className={styles.inputWrapper}>
+          <input
+            placeholder="جستجوی فروشگاه"
+            value={localSearch}
+            onChange={(e) => setLocalSearch(e.target.value)}
+          />
+          <SearchNormal1 size={"1rem"} />
+        </div>
         <div>
-          {merchants.data.map((item, _) => (
-            <div
-              key={item.id}
-              onClick={() => {
-                if (ids.includes(item.id))
-                  setIds((prev) => prev.filter((i) => i !== item.id));
-                else setIds((prev) => [...prev, item.id]);
-              }}
-            >
-              {ids.includes(item.id) ? (
-                <TickSquare variant="Bold" className={styles.isActive} />
-              ) : (
-                <Stop />
-              )}
-              <span className={ids.includes(item.id) ? styles.isActive : ""}>
-                {item.name}
-              </span>
-            </div>
-          ))}
+          {merchants.data
+            .filter((i) => i.name.includes(localSearch))
+            .map((item, _) => (
+              <div
+                key={item.id}
+                onClick={() => {
+                  if (ids.includes(item.id))
+                    setIds((prev) => prev.filter((i) => i !== item.id));
+                  else setIds((prev) => [...prev, item.id]);
+                }}
+              >
+                {ids.includes(item.id) ? (
+                  <TickSquare variant="Bold" className={styles.isActive} />
+                ) : (
+                  <Stop />
+                )}
+                <span className={ids.includes(item.id) ? styles.isActive : ""}>
+                  {item.name}
+                </span>
+              </div>
+            ))}
         </div>
       </div>
     </div>

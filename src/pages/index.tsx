@@ -28,6 +28,15 @@ const Home: NextPage<IHomePageData> = (props) => {
     setLoading(false);
   }, [props]);
 
+  // const baseURL = "https://interview-api.azkiloan.com/api/v1";
+
+  // //FETCH PRODUCT
+  // fetch(`${baseURL}/products?size=12&page=1`, {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({ merchantIds: [2661] }),
+  // }).then((res) => res.json().then((d) => console.log(d)));
+
   return (
     <main className={`${vazir.className} ${styles.mainPage}`}>
       <FilterSection
@@ -46,14 +55,26 @@ export default Home;
 export const getServerSideProps: GetServerSideProps<IHomePageData> = async (
   ctx
 ) => {
-  const { catId } = ctx.query;
   const baseURL = "https://interview-api.azkiloan.com/api/v1";
+
+  const { catId, merchants } = ctx.query;
+
+  const merchantsArr =
+    typeof merchants === "string"
+      ? [merchants]
+      : typeof merchants === "object"
+      ? [...merchants]
+      : [];
+
+  const merchantsArrNumber = merchantsArr.map((i) => +i);
 
   //FETCH PRODUCT
   const productRes = await fetch(
     `${baseURL}/products/${catId ? catId : ""}?size=12&page=1`,
     {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ merchantIds: merchantsArrNumber }),
     }
   );
   const productData = (await productRes.json()) as IProductRes;

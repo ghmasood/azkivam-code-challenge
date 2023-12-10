@@ -62,16 +62,44 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  max-height: 15rem;
-  overflow: scroll;
   > div {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    height: 10rem;
+    overflow: scroll;
     > div {
       display: flex;
       cursor: pointer;
       gap: 0.25rem;
+      font-size: 0.875rem;
+      font-weight: 300;
+      align-items: center;
+      user-select: none;
     }
+  }
+}
+
+.inputWrapper {
+  flex-direction: row !important;
+  align-items: center;
+  background-color: $background;
+  height: 2.75rem !important;
+  border: 1px solid $text-secondary;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  padding-right: 1rem;
+  padding-left: 0.5rem;
+
+  > svg {
+    color: $text-secondary;
+  }
+  > input {
+    font-family: "vazir" !important;
+    height: 100%;
+    width: 80%;
+    background-color: transparent;
+    border: none;
+    outline: none;
   }
 }
