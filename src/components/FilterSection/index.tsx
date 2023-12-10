@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import { CloudFog, SearchNormal1, Stop, TickSquare } from "iconsax-react";
+import { SearchNormal1, Stop, TickSquare } from "iconsax-react";
 
 import styles from "./filterSection.module.scss";
 
@@ -9,13 +9,11 @@ import { ICategoriesRes, IMerchantRes } from "@/types";
 interface IFilterSectionProps {
   merchants: IMerchantRes;
   categories: ICategoriesRes;
-  loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 function FilterSection({
   categories,
   merchants,
-  loading,
   setLoading,
 }: IFilterSectionProps) {
   //ROUTER
@@ -25,6 +23,7 @@ function FilterSection({
   const [ids, setIds] = useState<number[]>([]);
   const [localSearch, setLocalSearch] = useState("");
 
+  //LIFECYCLE HOOK
   useEffect(() => {
     setLoading(true);
     router.replace({ ...router, query: { ...router.query, merchants: ids } });
@@ -37,7 +36,10 @@ function FilterSection({
         <h4
           onClick={() => {
             setLoading(true);
-            router.replace({ pathname: router.pathname });
+            router.replace({
+              ...router,
+              query: { merchants: router.query.merchants },
+            });
           }}
         >
           دسته بندی‌ها

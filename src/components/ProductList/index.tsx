@@ -1,8 +1,11 @@
 import React from "react";
+
 import ProductCard from "../ProductCard";
-import { IProductRes } from "@/types";
-import styles from "./productList.module.scss";
 import ProductCardSkeleton from "../ProductCard/skeleton";
+
+import styles from "./productList.module.scss";
+
+import { IProductRes } from "@/types";
 
 interface IProductListProps {
   data: IProductRes;

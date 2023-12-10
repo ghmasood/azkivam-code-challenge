@@ -1,6 +1,7 @@
 import React from "react";
-import styles from "./productCard.module.scss";
 import Image from "next/image";
+
+import styles from "./productCard.module.scss";
 
 function ProductCardSkeleton() {
   return (
