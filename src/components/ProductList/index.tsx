@@ -26,6 +26,7 @@ function ProductList({ data, loading }: IProductListProps) {
         : data?.data?.map((item, index) => (
             <ProductCard
               key={item.id + "id" + index}
+              merchantName={item.merchantName}
               image={item.imageUrl}
               title={item.name}
               price={item.minPrice}

@@ -8,7 +8,38 @@
   padding: 2rem 1rem;
   border: 1px solid $border;
   background-color: $cardBg;
-  flex-basis: calc(100% / 4);
+  flex-basis: 100%;
+  position: relative;
+  > h5 {
+    background-color: $active;
+    color: $cardBg;
+    font-weight: 300;
+    padding: 0.125rem 0.25rem;
+    border-radius: 50px;
+    width: fit-content;
+    position: absolute;
+    z-index: 2;
+    left: 1rem;
+    top: 0.75rem;
+  }
+}
+
+@media screen and (min-width: $breakpoint-md) {
+  .card {
+    flex-basis: calc(100% / 2);
+  }
+}
+
+@media screen and (min-width: $breakpoint-lg) {
+  .card {
+    flex-basis: calc(100% / 3);
+  }
+}
+
+@media screen and (min-width: $breakpoint-xl) {
+  .card {
+    flex-basis: calc(100% / 4);
+  }
 }
 
 .imageContainer {

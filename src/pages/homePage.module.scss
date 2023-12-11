@@ -1,6 +1,41 @@
+@import "/src/assets/styles/helpers/variables";
+
 .mainPage {
   display: flex;
-  padding: 8rem;
+  flex-direction: column;
+  padding: 1rem;
   gap: 1rem;
   align-items: flex-start;
+}
+
+@media screen and (min-width: $breakpoint-sm) {
+  .mainPage {
+    padding: 1rem;
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: $breakpoint-sm) {
+  .mainPage {
+    padding: 3rem;
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: $breakpoint-lg) {
+  .mainPage {
+    padding: 4rem;
+  }
+}
+
+@media screen and (min-width: $breakpoint-xl) {
+  .mainPage {
+    padding: 6rem;
+  }
+}
+
+@media screen and (min-width: $breakpoint-xxl) {
+  .mainPage {
+    padding: 8rem;
+  }
 }

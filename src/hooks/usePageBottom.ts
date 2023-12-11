@@ -17,7 +17,7 @@ const usePageBottom = (haveAnyItem: boolean) => {
             ...router,
             query: {
               ...router.query,
-              limit: +(router.query.limit ?? 12) + 4,
+              limit: +(router.query.limit ?? 12) + 12,
             },
           },
           undefined,
