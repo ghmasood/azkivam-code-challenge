@@ -30,24 +30,7 @@ function ProductList({ data, loading }: IProductListProps) {
               price={item.minPrice}
             />
           ))}
-      <button
-        onClick={() =>
-          router.replace(
-            {
-              ...router,
-              query: {
-                ...router.query,
-                limit: +(router.query.limit ?? 12) + 3,
-              },
-            },
-            undefined,
-            { scroll: false }
-          )
-        }
-        style={{ display: "block" }}
-      >
-        ooo
-      </button>
+      {data.data.length === 0 && <div className={styles.noProduct}>no</div>}
     </div>
   );
 }

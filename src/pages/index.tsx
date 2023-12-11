@@ -7,6 +7,8 @@ import { Vazirmatn } from "next/font/google";
 import ProductList from "@/components/ProductList";
 import FilterSection from "@/components/FilterSection";
 
+import usePageBottom from "@/hooks/usePageBottom";
+
 import styles from "./homePage.module.scss";
 
 import {
@@ -25,9 +27,13 @@ const Home: NextPage<IHomePageData> = (props) => {
   //ROUTER
   const router = useRouter();
 
+  //LIFECYCLEHOOK
   useEffect(() => {
     setLoading(false);
   }, [props]);
+
+  //COSTUME HOOK
+  usePageBottom(props.productData.totalItems > +(router.query.limit ?? 12));
 
   return (
     <main className={`${vazir.className} ${styles.mainPage}`}>
