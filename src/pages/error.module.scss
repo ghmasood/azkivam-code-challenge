@@ -1,0 +1,40 @@
+@import "/src/assets/styles/helpers/variables";
+
+.errorPage {
+  position: absolute;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  top: 20%;
+  color: $text-tertiary;
+  & > div {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  & > p {
+    font-size: 13rem;
+    color: $text-tertiary;
+    font-weight: 700;
+  }
+  & > span {
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    line-height: 3rem;
+    justify-content: center;
+    color: $text-secondary;
+    font-weight: 400;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+
+    &:hover {
+      font-weight: 500;
+      color: $text-primary;
+    }
+  }
+}

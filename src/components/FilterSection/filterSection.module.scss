@@ -103,14 +103,14 @@
   border-radius: 0.5rem;
   padding-right: 1rem;
   padding-left: 0.5rem;
-
+  justify-content: space-between;
   > svg {
     color: $text-secondary;
   }
   > input {
     font-family: "vazir" !important;
     height: 100%;
-    width: 80%;
+    width: 90%;
     background-color: transparent;
     border: none;
     outline: none;
