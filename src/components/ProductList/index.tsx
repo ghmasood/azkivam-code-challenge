@@ -7,6 +7,7 @@ import ProductCardSkeleton from "../ProductCard/skeleton";
 import styles from "./productList.module.scss";
 
 import { IProductRes } from "@/types";
+import { BoxRemove } from "iconsax-react";
 
 interface IProductListProps {
   data: IProductRes;
@@ -30,7 +31,12 @@ function ProductList({ data, loading }: IProductListProps) {
               price={item.minPrice}
             />
           ))}
-      {data.data.length === 0 && <div className={styles.noProduct}>no</div>}
+      {data.data.length === 0 && (
+        <div className={styles.noProduct}>
+          <BoxRemove variant="TwoTone" size={"10rem"} />
+          <span>متاسفانه کالایی یافت نشد :(</span>
+        </div>
+      )}
     </div>
   );
 }

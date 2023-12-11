@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 
-import { SearchNormal1, Stop, TickSquare } from "iconsax-react";
+import {
+  ArrowRotateLeft,
+  SearchNormal1,
+  Stop,
+  TickSquare,
+} from "iconsax-react";
 
 import styles from "./filterSection.module.scss";
 
@@ -19,39 +24,38 @@ function FilterSection({
   //ROUTER
   const router = useRouter();
 
-  //STATES
-  const [ids, setIds] = useState<number[]>([]);
-  const [localSearch, setLocalSearch] = useState("");
+  //VARIABLES
+  const { merchantIds } = router.query;
+  const merchantsArr =
+    typeof merchantIds === "string"
+      ? [merchantIds]
+      : typeof merchantIds === "object"
+      ? [...merchantIds]
+      : [];
 
-  //LIFECYCLE HOOK
-  useEffect(() => {
-    setLoading(true);
-    router.replace({ ...router, query: { ...router.query, merchants: ids } });
-  }, [ids]);
+  //STATES
+  const [localSearch, setLocalSearch] = useState("");
 
   return (
     <div className={styles.filterWrapper}>
-      <h3>فیلترها</h3>
       <div>
-        <h4
+        <h3>فیلترها</h3>
+        <ArrowRotateLeft
           onClick={() => {
             setLoading(true);
-            router.query.merchants
-              ? router.replace({
-                  ...router,
-                  query: {
-                    merchants: router.query.merchants,
-                    limit: router.query.limit ?? 12,
-                  },
-                })
-              : router.replace({
-                  pathname: router.pathname,
-                  query: { limit: router.query.limit ?? 12 },
-                });
+
+            if (router.isReady)
+              router.replace({
+                ...router,
+                query: {
+                  limit: 12,
+                },
+              });
           }}
-        >
-          دسته بندی‌ها
-        </h4>
+        />
+      </div>
+      <div>
+        <h4>دسته بندی‌ها</h4>
         <div className={styles.categoriesWrapper}>
           {categories?.data?.map(
             (item) =>
@@ -125,17 +129,36 @@ function FilterSection({
               <div
                 key={item.id}
                 onClick={() => {
-                  if (ids.includes(item.id))
-                    setIds((prev) => prev.filter((i) => i !== item.id));
-                  else setIds((prev) => [...prev, item.id]);
+                  if (merchantsArr.includes("" + item.id))
+                    router.replace({
+                      ...router,
+                      query: {
+                        ...router.query,
+                        merchantIds: merchantsArr.filter(
+                          (i) => i !== item.id + ""
+                        ),
+                      },
+                    });
+                  else
+                    router.replace({
+                      ...router,
+                      query: {
+                        ...router.query,
+                        merchantIds: [...merchantsArr, item.id + ""],
+                      },
+                    });
                 }}
               >
-                {ids.includes(item.id) ? (
+                {merchantsArr.includes("" + item.id) ? (
                   <TickSquare variant="Bold" className={styles.isActive} />
                 ) : (
                   <Stop />
                 )}
-                <span className={ids.includes(item.id) ? styles.isActive : ""}>
+                <span
+                  className={
+                    merchantsArr.includes("" + item.id) ? styles.isActive : ""
+                  }
+                >
                   {item.name}
                 </span>
               </div>

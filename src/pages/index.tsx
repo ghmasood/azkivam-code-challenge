@@ -54,16 +54,16 @@ export const getServerSideProps: GetServerSideProps<IHomePageData> = async (
 ) => {
   const baseURL = "https://interview-api.azkiloan.com/api/v1";
 
-  const { catId, merchants, limit } = ctx.query;
+  const { catId, merchantIds, limit } = ctx.query;
 
   //VARIABLES
-  const merchantsArr =
-    typeof merchants === "string"
-      ? [merchants]
-      : typeof merchants === "object"
-      ? [...merchants]
+  const merchantIdsArr =
+    typeof merchantIds === "string"
+      ? [merchantIds]
+      : typeof merchantIds === "object"
+      ? [...merchantIds]
       : [];
-  const merchantsArrNumber = merchantsArr.map((i) => +i);
+  const merchantIdsArrNumber = merchantIdsArr.map((i) => +i);
 
   //FETCH PRODUCT
   const productRes = await fetch(
@@ -71,7 +71,7 @@ export const getServerSideProps: GetServerSideProps<IHomePageData> = async (
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ merchantIds: merchantsArrNumber }),
+      body: JSON.stringify({ merchantIds: merchantIdsArrNumber }),
     }
   );
   const productData = (await productRes.json()) as IProductRes;
