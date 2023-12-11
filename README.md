@@ -60,8 +60,19 @@ bun dev
     
 ### Snapshots:
 
-- Home Page <br/><br/> <img width="1920" alt="Screenshot 1402-02-26 at 22 03 19" src="https://github.com/ghmasood/jabama-code-challenge/assets/33165677/913f6dcb-86b7-4027-b9cf-ce859b5ef330"> <br/><br/>
-- Skeleton Loading <br/><br/> <img width="1920" alt="Screenshot 1402-02-26 at 22 03 57" src="https://github.com/ghmasood/jabama-code-challenge/assets/33165677/0ebecc5e-a56f-4d61-b604-5347fd34419b"> <br/><br/>
-- Search Result <br/><br/> <img width="1920" alt="Screenshot 1402-02-26 at 22 04 03" src="https://github.com/ghmasood/jabama-code-challenge/assets/33165677/e8e1ca91-68fb-486d-aabb-2db9942066db"> <br/><br/>
-- Not Found Result <br/><br/> <img width="1920" alt="Screenshot 1402-02-26 at 22 04 14" src="https://github.com/ghmasood/jabama-code-challenge/assets/33165677/22e4cb30-7fed-4229-8dd9-08f7d86ecb96"> <br/><br/>
-- Error Page <br/><br/> <img width="1920" alt="Screenshot 1402-02-26 at 22 04 46" src="https://github.com/ghmasood/jabama-code-challenge/assets/33165677/967b449b-d82e-4991-987f-3b53c1fd0a0a">
+- Home Page <br/><br/> <img width="1920" alt="Screenshot 1402-09-20 at 18 37 22" src="https://github.com/ghmasood/azkivam-code-challenge/assets/33165677/586b7acb-cb98-4ffe-8e03-b75770917ef6"> <br/><br/>
+- Skeleton Loading <br/><br/> <img width="1920" alt="Screenshot 1402-09-20 at 18 45 21" src="https://github.com/ghmasood/azkivam-code-challenge/assets/33165677/a1ce7c60-b819-423f-ac50-d005a287fcb7"> <br/><br/>
+- Search Result <br/><br/> <img width="1920" alt="Screenshot 1402-09-20 at 18 37 39" src="https://github.com/ghmasood/azkivam-code-challenge/assets/33165677/713b3866-c55f-42b3-a5d7-f68bd953c8f7"> <br/><br/>
+- Mobile View <br/><br/>
+  <table ><tr  >
+    <td valign="top" width="50%">
+        <img width="624" alt="Screenshot 1402-09-20 at 18 38 37" src="https://github.com/ghmasood/azkivam-code-challenge/assets/33165677/83bb1dab-f5c6-4cb2-859e-cf60928d8b3e">
+    </td>
+    <td valign="top" width="50%">
+        <img width="624" alt="Screenshot 1402-09-20 at 18 38 34" src="https://github.com/ghmasood/azkivam-code-challenge/assets/33165677/f4afb258-8c0a-44cb-85c2-6d030024e33a">
+    </td>
+  </tr></table>
+  <br/><br/>
+- Not Found Result <br/><br/> <img width="1920" alt="Screenshot 1402-09-20 at 18 39 24" src="https://github.com/ghmasood/azkivam-code-challenge/assets/33165677/23000f74-80a7-4675-a809-1e1cc83cdced"><br/><br/>
+- Error Page <br/><br/> <img width="1920" alt="Screenshot 1402-09-20 at 18 39 38" src="https://github.com/ghmasood/azkivam-code-challenge/assets/33165677/bd283006-bfe4-4626-93ab-4756ba950183"> <br/><br/>
+
