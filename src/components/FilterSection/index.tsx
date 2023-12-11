@@ -36,10 +36,18 @@ function FilterSection({
         <h4
           onClick={() => {
             setLoading(true);
-            router.replace({
-              ...router,
-              query: { merchants: router.query.merchants },
-            });
+            router.query.merchants
+              ? router.replace({
+                  ...router,
+                  query: {
+                    merchants: router.query.merchants,
+                    limit: router.query.limit ?? 12,
+                  },
+                })
+              : router.replace({
+                  pathname: router.pathname,
+                  query: { limit: router.query.limit ?? 12 },
+                });
           }}
         >
           دسته بندی‌ها

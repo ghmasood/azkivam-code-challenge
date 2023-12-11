@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 import ProductCard from "../ProductCard";
 import ProductCardSkeleton from "../ProductCard/skeleton";
@@ -12,6 +13,9 @@ interface IProductListProps {
   loading: boolean;
 }
 function ProductList({ data, loading }: IProductListProps) {
+  //ROUTER
+  const router = useRouter();
+
   return (
     <div className={styles.list}>
       {loading
@@ -26,6 +30,24 @@ function ProductList({ data, loading }: IProductListProps) {
               price={item.minPrice}
             />
           ))}
+      <button
+        onClick={() =>
+          router.replace(
+            {
+              ...router,
+              query: {
+                ...router.query,
+                limit: +(router.query.limit ?? 12) + 3,
+              },
+            },
+            undefined,
+            { scroll: false }
+          )
+        }
+        style={{ display: "block" }}
+      >
+        ooo
+      </button>
     </div>
   );
 }

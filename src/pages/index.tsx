@@ -25,7 +25,6 @@ const Home: NextPage<IHomePageData> = (props) => {
   //ROUTER
   const router = useRouter();
 
-  //LIFECYCLE HOOK
   useEffect(() => {
     setLoading(false);
   }, [props]);
@@ -49,7 +48,7 @@ export const getServerSideProps: GetServerSideProps<IHomePageData> = async (
 ) => {
   const baseURL = "https://interview-api.azkiloan.com/api/v1";
 
-  const { catId, merchants } = ctx.query;
+  const { catId, merchants, limit } = ctx.query;
 
   //VARIABLES
   const merchantsArr =
@@ -62,7 +61,7 @@ export const getServerSideProps: GetServerSideProps<IHomePageData> = async (
 
   //FETCH PRODUCT
   const productRes = await fetch(
-    `${baseURL}/products/${catId ? catId : ""}?size=12&page=1`,
+    `${baseURL}/products/${catId ? catId : ""}?size=${limit ?? 12}&page=1`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
