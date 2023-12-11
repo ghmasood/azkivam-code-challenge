@@ -11,11 +11,13 @@ import {
 import styles from "./filterSection.module.scss";
 
 import { ICategoriesRes, IMerchantRes } from "@/types";
+
 interface IFilterSectionProps {
   merchants: IMerchantRes;
   categories: ICategoriesRes;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 function FilterSection({
   categories,
   merchants,
@@ -35,11 +37,16 @@ function FilterSection({
 
   //STATES
   const [localSearch, setLocalSearch] = useState("");
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className={styles.filterWrapper}>
+    <div
+      className={`${styles.filterWrapper} ${
+        isOpen ? styles.open : styles.close
+      }`}
+    >
       <div>
-        <h3>فیلترها</h3>
+        <h3 onClick={() => setIsOpen((prev) => !prev)}>فیلترها</h3>
         <ArrowRotateLeft
           onClick={() => {
             setLoading(true);

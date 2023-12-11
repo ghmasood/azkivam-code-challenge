@@ -1,13 +1,14 @@
 import React from "react";
 import { useRouter } from "next/router";
 
+import { BoxRemove } from "iconsax-react";
+
 import ProductCard from "../ProductCard";
 import ProductCardSkeleton from "../ProductCard/skeleton";
 
 import styles from "./productList.module.scss";
 
 import { IProductRes } from "@/types";
-import { BoxRemove } from "iconsax-react";
 
 interface IProductListProps {
   data: IProductRes;
