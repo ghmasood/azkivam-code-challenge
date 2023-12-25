@@ -52,7 +52,7 @@ export default Home;
 export const getServerSideProps: GetServerSideProps<IHomePageData> = async (
   ctx
 ) => {
-  const baseURL = "https://interview-api.azkiloan.com/api/v1";
+  const baseURL = "https://interview-api.azkivam.com/api/v1";
 
   const { catId, merchantIds, limit } = ctx.query;
 
