@@ -55,7 +55,7 @@ export const getServerSideProps: GetServerSideProps<IHomePageData> = async (
   const baseURL = "https://interview-api.azkivam.com/api/v1";
 
   const { catId, merchantIds, limit } = ctx.query;
-
+  console.log(ctx.query);
   //VARIABLES
   const merchantIdsArr =
     typeof merchantIds === "string"

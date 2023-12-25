@@ -38,6 +38,7 @@ export interface ICategories {
   priority: number;
   mapped: boolean;
   parent: number;
+  children?: ICategories[];
 }
 
 export interface ICategoriesRes {

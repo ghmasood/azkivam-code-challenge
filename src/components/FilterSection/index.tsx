@@ -10,7 +10,7 @@ import {
 
 import styles from "./filterSection.module.scss";
 
-import { ICategoriesRes, IMerchantRes } from "@/types";
+import { ICategories, ICategoriesRes, IMerchantRes } from "@/types";
 
 interface IFilterSectionProps {
   merchants: IMerchantRes;
@@ -38,8 +38,30 @@ function FilterSection({
   //STATES
   const [localSearch, setLocalSearch] = useState("");
   const [isOpen, setIsOpen] = useState(true);
+  const rawData = categories.data;
 
-  return (
+  const getParentDeep = (
+    arr: ICategories[],
+    targetId: number | null
+  ): ICategories | undefined =>
+    arr.find(({ id }) => id === targetId) ??
+    arr
+      .flatMap(({ children }) => getParentDeep(children ?? [], targetId))
+      .filter((e) => e)
+      .at(0);
+
+  const result = rawData
+    .sort(({ id: a }, { id: b }) => a - b)
+    .reduce((acc: ICategories[], data) => {
+      const obj: ICategories = { ...data, children: [] };
+      const parentObj = getParentDeep(acc, obj.parent);
+      if (parentObj) parentObj?.children?.push(obj);
+      else acc.push(obj);
+      return acc;
+    }, []);
+
+
+    return (
     <div
       className={`${styles.filterWrapper} ${
         isOpen ? styles.open : styles.close
