@@ -14,6 +14,7 @@ const Error: NextPage<Props> = ({ statusCode }) => {
   const router = useRouter();
   //STATES
   const [loading, setLoading] = useState(false);
+  console.log(statusCode);
   return (
     <div className={styles.errorPage}>
       <p>{statusCode}</p>
