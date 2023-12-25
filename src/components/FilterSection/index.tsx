@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
+import React, { useState } from 'react';
+import { NextRouter, useRouter } from 'next/router';
 
 import {
   ArrowRotateLeft,
   SearchNormal1,
   Stop,
   TickSquare,
-} from "iconsax-react";
+} from 'iconsax-react';
 
-import styles from "./filterSection.module.scss";
+import styles from './filterSection.module.scss';
 
-import { ICategories, ICategoriesRes, IMerchantRes } from "@/types";
+import { ICategories, ICategoriesRes, IMerchantRes } from '@/types';
 
 interface IFilterSectionProps {
   merchants: IMerchantRes;
@@ -29,14 +29,14 @@ function FilterSection({
   //VARIABLES
   const { merchantIds } = router.query;
   const merchantsArr =
-    typeof merchantIds === "string"
+    typeof merchantIds === 'string'
       ? [merchantIds]
-      : typeof merchantIds === "object"
+      : typeof merchantIds === 'object'
       ? [...merchantIds]
       : [];
 
   //STATES
-  const [localSearch, setLocalSearch] = useState("");
+  const [localSearch, setLocalSearch] = useState('');
   const [isOpen, setIsOpen] = useState(true);
   const rawData = categories.data;
 
@@ -52,16 +52,19 @@ function FilterSection({
 
   const result = rawData
     .sort(({ id: a }, { id: b }) => a - b)
-    .reduce((acc: ICategories[], data) => {
-      const obj: ICategories = { ...data, children: [] };
+    .reduce((acc: ICategories[], data, index) => {
+      const obj: ICategories = {
+        ...data,
+        children: [],
+        depth: 0,
+      };
       const parentObj = getParentDeep(acc, obj.parent);
       if (parentObj) parentObj?.children?.push(obj);
       else acc.push(obj);
       return acc;
     }, []);
 
-
-    return (
+  return (
     <div
       className={`${styles.filterWrapper} ${
         isOpen ? styles.open : styles.close
@@ -85,59 +88,16 @@ function FilterSection({
       </div>
       <div>
         <h4>دسته بندی‌ها</h4>
-        <div className={styles.categoriesWrapper}>
-          {categories?.data?.map(
-            (item) =>
-              item.parent === null && (
-                <div key={item.id}>
-                  <div
-                    className={
-                      Number(router?.query?.catId) === item.id ||
-                      categories?.data?.find(
-                        (x) => x?.id === +(router?.query?.catId ?? "0")
-                      )?.parent === item.id
-                        ? styles.isActive
-                        : ""
-                    }
-                    onClick={() => {
-                      setLoading(true);
-                      router.replace({
-                        ...router,
-                        query: { ...router.query, catId: item.id },
-                      });
-                    }}
-                  >
-                    {" "}
-                    {item.name}
-                    {/* <ArrowDown2 size={"1.5rem"} /> */}
-                  </div>
-                  <div>
-                    {categories?.data?.map(
-                      (i) =>
-                        i.parent === item.id && (
-                          <div
-                            key={i.id}
-                            className={
-                              Number(router?.query?.catId) === i.id
-                                ? styles.isActive
-                                : ""
-                            }
-                            onClick={() => {
-                              setLoading(true);
-                              router.replace({
-                                ...router,
-                                query: { ...router.query, catId: i.id },
-                              });
-                            }}
-                          >
-                            {i.name}
-                          </div>
-                        )
-                    )}
-                  </div>
-                </div>
-              )
-          )}
+        <div className={styles.categriesWrapper}>
+          {result.map((item, index) => (
+            <Item
+              key={item.id}
+              data={item}
+              index={index}
+              setLoading={setLoading}
+              router={router}
+            />
+          ))}
         </div>
       </div>
       <hr />
@@ -145,11 +105,11 @@ function FilterSection({
         <h4>فروشگاه‌ها</h4>
         <div className={styles.inputWrapper}>
           <input
-            placeholder="جستجوی فروشگاه"
+            placeholder='جستجوی فروشگاه'
             value={localSearch}
             onChange={(e) => setLocalSearch(e.target.value)}
           />
-          <SearchNormal1 size={"1rem"} />
+          <SearchNormal1 size={'1rem'} />
         </div>
         <div>
           {merchants.data
@@ -158,13 +118,13 @@ function FilterSection({
               <div
                 key={item.id}
                 onClick={() => {
-                  if (merchantsArr.includes("" + item.id))
+                  if (merchantsArr.includes('' + item.id))
                     router.replace({
                       ...router,
                       query: {
                         ...router.query,
                         merchantIds: merchantsArr.filter(
-                          (i) => i !== item.id + ""
+                          (i) => i !== item.id + ''
                         ),
                       },
                     });
@@ -173,19 +133,19 @@ function FilterSection({
                       ...router,
                       query: {
                         ...router.query,
-                        merchantIds: [...merchantsArr, item.id + ""],
+                        merchantIds: [...merchantsArr, item.id + ''],
                       },
                     });
                 }}
               >
-                {merchantsArr.includes("" + item.id) ? (
-                  <TickSquare variant="Bold" className={styles.isActive} />
+                {merchantsArr.includes('' + item.id) ? (
+                  <TickSquare variant='Bold' className={styles.isActive} />
                 ) : (
                   <Stop />
                 )}
                 <span
                   className={
-                    merchantsArr.includes("" + item.id) ? styles.isActive : ""
+                    merchantsArr.includes('' + item.id) ? styles.isActive : ''
                   }
                 >
                   {item.name}
@@ -197,5 +157,47 @@ function FilterSection({
     </div>
   );
 }
-
 export default FilterSection;
+
+export function Item({
+  data,
+  index,
+  setLoading,
+  router,
+}: {
+  data: ICategories;
+  index: number;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  router: NextRouter;
+}) {
+  return (
+    <div>
+      <div
+        style={{ whiteSpace: 'pre-wrap' }}
+        onClick={() => {
+          setLoading(true);
+          router.replace({
+            ...router,
+            query: { ...router.query, catId: data.id },
+          });
+        }}
+      >
+        {data.name}
+      </div>
+
+      {(data?.children?.length ?? 0) > 0 && (
+        <div>
+          {data?.children?.map((i, j) => (
+            <Item
+              key={i.id + 'a'}
+              data={{ ...i, name: '-'.repeat(i.depth ?? 0) + i.name }}
+              index={j}
+              setLoading={setLoading}
+              router={router}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

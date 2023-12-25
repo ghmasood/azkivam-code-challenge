@@ -39,6 +39,7 @@ export interface ICategories {
   mapped: boolean;
   parent: number;
   children?: ICategories[];
+  depth?: number;
 }
 
 export interface ICategoriesRes {
